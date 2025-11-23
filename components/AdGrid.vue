@@ -137,6 +137,11 @@ import { useAdStore, GRID_WIDTH, GRID_HEIGHT } from '~/composables/useAdStore';
 
 const { ads, buyAd, getZoneForDay, isZoneUnlocked, checkCollision, calculatePrice, init } = useAdStore();
 
+// Initialize ads from database
+onMounted(async () => {
+  await init();
+});
+
 const gridRef = ref<HTMLElement | null>(null);
 const isModalOpen = ref(false);
 
