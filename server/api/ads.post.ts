@@ -4,6 +4,7 @@ import { randomUUID } from 'crypto';
 export default defineEventHandler(async (event) => {
   const body = await readBody(event);
   const db = useDb();
+  await db.init(); // Ensure table exists
 
   // Basic validation
   if (body.x === undefined || body.y === undefined || !body.width || !body.height || !body.imageUrl || !body.linkUrl) {
@@ -26,12 +27,7 @@ export default defineEventHandler(async (event) => {
     price: body.price
   };
 
-  const stmt = db.prepare(`
-    INSERT INTO ads (id, x, y, width, height, imageUrl, linkUrl, altText, ownerName, price)
-    VALUES (@id, @x, @y, @width, @height, @imageUrl, @linkUrl, @altText, @ownerName, @price)
-  `);
-
-  stmt.run(ad);
+  await db.insert(ad);
 
   return ad;
 });

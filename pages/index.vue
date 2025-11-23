@@ -7,7 +7,7 @@
         <span class="absolute left-1/4 top-1/2 animate-bounce text-2xl">⭐</span>
         <span class="absolute right-1/4 top-1/3 animate-bounce-slow text-2xl" style="animation-delay: 0.5s">❄️</span>
       </div>
-      <p class="relative z-10">🎄 © {{ new Date().getFullYear() }} Adventni Dobrodelni Grid. Vsak prispevek šteje! 🎁</p>
+      <p class="relative z-10">🎄 © {{ new Date().getFullYear() }} Adventna Dobrodelna Mreža. Vsak prispevek šteje! 🎁</p>
       <p class="text-xs text-gray-400 relative z-10">Zbrana sredstva gredo v dobrodelne namene. ❤️</p>
     </footer>
     <DevTools />

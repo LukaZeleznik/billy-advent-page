@@ -1,29 +1,43 @@
-import Database from 'better-sqlite3';
-import { mkdirSync } from 'fs';
-import { dirname, join } from 'path';
+import { sql } from '@vercel/postgres';
 
-const dbPath = join(process.cwd(), 'data', 'advent.db');
+export const useDb = () => {
+  return {
+    // Initialize table
+    async init() {
+      await sql`
+        CREATE TABLE IF NOT EXISTS ads (
+          id TEXT PRIMARY KEY,
+          x INTEGER NOT NULL,
+          y INTEGER NOT NULL,
+          width INTEGER NOT NULL,
+          height INTEGER NOT NULL,
+          imageUrl TEXT NOT NULL,
+          linkUrl TEXT NOT NULL,
+          altText TEXT NOT NULL,
+          ownerName TEXT NOT NULL,
+          price REAL NOT NULL,
+          createdAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+        )
+      `;
+    },
 
-// Ensure data directory exists
-mkdirSync(dirname(dbPath), { recursive: true });
+    // Get all ads
+    async getAll() {
+      const { rows } = await sql`SELECT * FROM ads`;
+      return rows;
+    },
 
-const db = new Database(dbPath);
+    // Insert ad
+    async insert(ad: any) {
+      await sql`
+        INSERT INTO ads (id, x, y, width, height, imageUrl, linkUrl, altText, ownerName, price)
+        VALUES (${ad.id}, ${ad.x}, ${ad.y}, ${ad.width}, ${ad.height}, ${ad.imageUrl}, ${ad.linkUrl}, ${ad.altText}, ${ad.ownerName}, ${ad.price})
+      `;
+    },
 
-// Initialize table
-db.exec(`
-  CREATE TABLE IF NOT EXISTS ads (
-    id TEXT PRIMARY KEY,
-    x INTEGER NOT NULL,
-    y INTEGER NOT NULL,
-    width INTEGER NOT NULL,
-    height INTEGER NOT NULL,
-    imageUrl TEXT NOT NULL,
-    linkUrl TEXT NOT NULL,
-    altText TEXT NOT NULL,
-    ownerName TEXT NOT NULL,
-    price REAL NOT NULL,
-    createdAt DATETIME DEFAULT CURRENT_TIMESTAMP
-  )
-`);
-
-export const useDb = () => db;
+    // Delete all ads
+    async deleteAll() {
+      await sql`DELETE FROM ads`;
+    }
+  };
+};

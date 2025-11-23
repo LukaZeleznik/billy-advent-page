@@ -1,8 +1,7 @@
 import { useDb } from '../utils/db';
 
-export default defineEventHandler((event) => {
+export default defineEventHandler(async (event) => {
   const db = useDb();
-  const stmt = db.prepare('DELETE FROM ads');
-  stmt.run();
+  await db.deleteAll();
   return { success: true };
 });

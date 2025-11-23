@@ -28,7 +28,7 @@
       </NuxtLink>
 
       <p class="text-xs text-gray-400 mt-4">
-        Srčno hvala za podporo Adventnemu Dobrodel­nemu Grid projektu! ❤️
+        Srčno hvala za podporo Adventni Dobrodelni Mreži! ❤️
       </p>
     </div>
   </div>

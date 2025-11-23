@@ -19,7 +19,7 @@
       <div class="flex items-center justify-center gap-3 mb-2">
         <span class="text-6xl animate-bounce-slow">🎄</span>
         <h1 class="text-6xl md:text-7xl font-black text-transparent bg-clip-text bg-gradient-to-r from-red-600 via-green-600 to-red-600 drop-shadow-sm animate-glow">
-          ADVENTNI<br/>DOBRODELNI GRID
+          ADVENTNA<br/>DOBRODELNA MREŽA
         </h1>
         <span class="text-6xl animate-bounce-slow-delayed">🎁</span>
       </div>

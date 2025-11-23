@@ -39,6 +39,8 @@ export default defineEventHandler(async (event) => {
 
       if (metadata) {
         const db = useDb();
+        await db.init(); // Ensure table exists
+
         const ad = {
           id: randomUUID(),
           x: parseInt(metadata.x),
@@ -52,12 +54,7 @@ export default defineEventHandler(async (event) => {
           price: parseFloat(metadata.price)
         };
 
-        const stmt = db.prepare(`
-          INSERT INTO ads (id, x, y, width, height, imageUrl, linkUrl, altText, ownerName, price)
-          VALUES (@id, @x, @y, @width, @height, @imageUrl, @linkUrl, @altText, @ownerName, @price)
-        `);
-
-        stmt.run(ad);
+        await db.insert(ad);
         console.log('Ad saved from webhook:', ad.id);
       }
     }

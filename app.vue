@@ -6,9 +6,9 @@
 
 <script setup lang="ts">
 useHead({
-  title: 'Million Dollar Advent Calendar',
+  title: 'Adventna Dobrodelna Mreža',
   meta: [
-    { name: 'description', content: 'Own a piece of the advent grid.' }
+    { name: 'description', content: 'Podprite dobrodelnost z nakupom pikslov na adventni mreži.' }
   ],
   link: [
     { rel: 'preconnect', href: 'https://fonts.googleapis.com' },
