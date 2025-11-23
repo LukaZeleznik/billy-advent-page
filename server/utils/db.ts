@@ -24,14 +24,19 @@ export const useDb = () => {
     // Get all ads
     async getAll() {
       const { rows } = await sql`SELECT * FROM ads`;
-      // Convert numeric fields from strings to numbers (Postgres returns them as strings sometimes)
+      // Convert lowercase Postgres fields to camelCase and ensure numbers are numbers
       return rows.map((row: any) => ({
-        ...row,
+        id: row.id,
         x: Number(row.x),
         y: Number(row.y),
         width: Number(row.width),
         height: Number(row.height),
-        price: Number(row.price)
+        imageUrl: row.imageurl,  // Postgres returns lowercase
+        linkUrl: row.linkurl,    // Postgres returns lowercase
+        altText: row.alttext,    // Postgres returns lowercase
+        ownerName: row.ownername, // Postgres returns lowercase
+        price: Number(row.price),
+        createdAt: row.createdat
       }));
     },
 
