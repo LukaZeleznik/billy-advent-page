@@ -23,15 +23,9 @@ export const useAdStore = () => {
   // Initialize from API
   const init = async () => {
     try {
-      const { data, error } = await useFetch<Ad[]>('/api/ads');
-      if (error.value) {
-        console.error('Failed to fetch ads', error.value);
-        ads.value = [];
-      } else if (data.value) {
-        ads.value = data.value;
-      } else {
-        ads.value = [];
-      }
+      // Use $fetch to avoid caching issues - we want fresh data on every mount
+      const data = await $fetch<Ad[]>('/api/ads');
+      ads.value = data || [];
     } catch (e) {
       console.error('Failed to fetch ads during init', e);
       ads.value = [];
